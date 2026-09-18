@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' http://127.0.0.1:15721 http://localhost:15721; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none';">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <title>WinUtil NG</title>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">W</div>
+        <div>
+          <div class="brand-title">WinUtil NG</div>
+          <div class="brand-sub">Windows Control Center</div>
+        </div>
+      </div>
+
+      <nav id="nav" class="nav"></nav>
+
+      <div class="sidebar-footer">
+        <button id="connectBtn" class="ghost-btn">Agent'e Bağlan</button>
+        <div id="connectionState" class="connection disconnected">● Offline</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">LOCAL WINDOWS MANAGEMENT</div>
+          <h1 id="pageTitle">Dashboard</h1>
+        </div>
+        <div class="top-actions">
+          <select id="profile" aria-label="Optimization profile">
+            <option value="safe">Safe</option>
+            <option value="balanced">Balanced</option>
+            <option value="aggressive">Aggressive</option>
+          </select>
+          <button id="scanBtn" class="btn secondary">Scan</button>
+          <button id="previewBtn" class="btn secondary">Preview</button>
+          <button id="applyBtn" class="btn primary">Apply Selected</button>
+        </div>
+      </header>
+
+      <section id="dashboard" class="page active"></section>
+      <section id="tweaksPage" class="page"></section>
+
+      <section class="bottom-grid">
+        <div class="panel progress-panel">
+          <div class="panel-heading"><span>Operation</span><span id="progressLabel">Idle</span></div>
+          <div class="progress"><div id="progressBar" class="progress-bar"></div></div>
+          <div id="stageLabel" class="muted">No active job.</div>
+        </div>
+        <div class="panel log-panel">
+          <div class="panel-heading"><span>Activity Log</span><button id="clearLog" class="tiny-btn">Clear</button></div>
+          <pre id="logBox"></pre>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="connectDialog">
+    <div class="dialog-body">
+      <div class="eyebrow">LOCAL AGENT</div>
+      <h2>WinUtil Agent'e bağlan</h2>
+      <p class="muted">Agent token'ı aynı bilgisayarda bir kez girin. Token yalnızca bu tarayıcı profilinde saklanır.</p>
+      <label for="tokenInput">Agent Token</label>
+      <input id="tokenInput" class="text-input" autocomplete="off" spellcheck="false">
+      <div class="dialog-actions">
+        <button id="cancelConnect" class="btn secondary">İptal</button>
+        <button id="saveToken" class="btn primary">Bağlan</button>
+      </div>
+      <div class="help-box">
+        Token'ı görmek için kurulu agent dizininde:<br>
+        <code>WinUtil.Agent.exe --show-token</code>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

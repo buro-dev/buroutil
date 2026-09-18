@@ -1,0 +1,11 @@
+run = "node tools/serve-site.mjs"
+entrypoint = "site/index.html"
+modules = ["nodejs-22"]
+
+[deployment]
+run = ["node", "tools/serve-site.mjs"]
+deploymentTarget = "autoscale"
+
+[[ports]]
+localPort = 5000
+externalPort = 80

@@ -1,0 +1,509 @@
+{
+  "SchemaVersion": 1,
+  "Project": "WinUtil NG",
+  "Profiles": {
+    "safe": "Low-risk, reversible or read-mostly actions",
+    "balanced": "Low + Medium risk actions",
+    "aggressive": "Low + Medium + High risk actions; opt-in only"
+  },
+  "Tweaks": [
+    {
+      "Id": "Privacy.Telemetry",
+      "Name": "Limit Windows Telemetry Policy",
+      "Description": "Sets the Windows telemetry policy value where the policy is supported. It does not claim to disable all Microsoft telemetry.",
+      "Category": "Privacy",
+      "Scope": "System",
+      "Provider": "Registry",
+      "Risk": "Low",
+      "RequiresAdmin": true,
+      "Reversible": true,
+      "EnabledByDefault": true,
+      "RequiresRestorePoint": true,
+      "Tags": [
+        "telemetry",
+        "privacy",
+        "registry"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {
+        "RegistryPath": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "ValueName": "AllowTelemetry",
+        "DesiredValue": 0,
+        "PropertyType": "DWord"
+      }
+    },
+    {
+      "Id": "Privacy.CortanaPolicy",
+      "Name": "Legacy Cortana Policy",
+      "Description": "Applies the legacy Cortana policy value where the policy is recognized. Modern Windows builds may not expose Cortana as a functional component.",
+      "Category": "Privacy",
+      "Scope": "System",
+      "Provider": "Registry",
+      "Risk": "Low",
+      "RequiresAdmin": true,
+      "Reversible": true,
+      "EnabledByDefault": true,
+      "RequiresRestorePoint": true,
+      "Tags": [
+        "cortana",
+        "privacy",
+        "legacy"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {
+        "RegistryPath": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "ValueName": "AllowCortana",
+        "DesiredValue": 0,
+        "PropertyType": "DWord"
+      }
+    },
+    {
+      "Id": "Privacy.BingSearch",
+      "Name": "Legacy Bing Search Integration",
+      "Description": "Applies the legacy per-user Bing Search policy value. Effect depends on the Windows build and search experience.",
+      "Category": "Privacy",
+      "Scope": "User",
+      "Provider": "Registry",
+      "Risk": "Low",
+      "RequiresAdmin": false,
+      "Reversible": true,
+      "EnabledByDefault": true,
+      "RequiresRestorePoint": true,
+      "Tags": [
+        "bing",
+        "search",
+        "privacy"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {
+        "RegistryPath": "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search",
+        "ValueName": "BingSearchEnabled",
+        "DesiredValue": 0,
+        "PropertyType": "DWord"
+      }
+    },
+    {
+      "Id": "Privacy.CortanaConsent",
+      "Name": "Legacy Cortana Consent",
+      "Description": "Applies the legacy Cortana consent value for compatibility with older Windows Search configurations.",
+      "Category": "Privacy",
+      "Scope": "User",
+      "Provider": "Registry",
+      "Risk": "Low",
+      "RequiresAdmin": false,
+      "Reversible": true,
+      "EnabledByDefault": true,
+      "RequiresRestorePoint": true,
+      "Tags": [
+        "cortana",
+        "privacy",
+        "legacy"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {
+        "RegistryPath": "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search",
+        "ValueName": "CortanaConsent",
+        "DesiredValue": 0,
+        "PropertyType": "DWord"
+      }
+    },
+    {
+      "Id": "Privacy.AdvertisingId",
+      "Name": "Disable Advertising ID",
+      "Description": "Disables the Windows advertising identifier for the current user.",
+      "Category": "Privacy",
+      "Scope": "User",
+      "Provider": "Registry",
+      "Risk": "Low",
+      "RequiresAdmin": false,
+      "Reversible": true,
+      "EnabledByDefault": true,
+      "RequiresRestorePoint": false,
+      "Tags": [
+        "advertising",
+        "privacy"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {
+        "RegistryPath": "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo",
+        "ValueName": "Enabled",
+        "DesiredValue": 0,
+        "PropertyType": "DWord"
+      }
+    },
+    {
+      "Id": "Privacy.Feedback",
+      "Name": "Limit Feedback Prompt Frequency",
+      "Description": "Sets the Windows Feedback SIUF counter to zero for the current user.",
+      "Category": "Privacy",
+      "Scope": "User",
+      "Provider": "Registry",
+      "Risk": "Low",
+      "RequiresAdmin": false,
+      "Reversible": true,
+      "EnabledByDefault": true,
+      "RequiresRestorePoint": false,
+      "Tags": [
+        "feedback",
+        "siuf",
+        "privacy"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {
+        "RegistryPath": "HKCU:\\SOFTWARE\\Microsoft\\Siuf\\Rules",
+        "ValueName": "NumberOfSIUFInPeriod",
+        "DesiredValue": 0,
+        "PropertyType": "DWord"
+      }
+    },
+    {
+      "Id": "Privacy.ConsumerFeatures",
+      "Name": "Disable Consumer Features Policy",
+      "Description": "Disables Windows consumer feature suggestions through the policy registry value.",
+      "Category": "Privacy",
+      "Scope": "System",
+      "Provider": "Registry",
+      "Risk": "Low",
+      "RequiresAdmin": true,
+      "Reversible": true,
+      "EnabledByDefault": false,
+      "RequiresRestorePoint": true,
+      "Tags": [
+        "consumer",
+        "privacy",
+        "policy"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {
+        "RegistryPath": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent",
+        "ValueName": "DisableWindowsConsumerFeatures",
+        "DesiredValue": 1,
+        "PropertyType": "DWord"
+      }
+    },
+    {
+      "Id": "Cleanup.TempFiles",
+      "Name": "Clean Temporary Files",
+      "Description": "Removes files that can be deleted from the current user's TEMP directory and Windows TEMP directory. Files locked by running processes are skipped.",
+      "Category": "Cleanup",
+      "Scope": "System",
+      "Provider": "Cleanup",
+      "Risk": "Low",
+      "RequiresAdmin": true,
+      "Reversible": false,
+      "EnabledByDefault": false,
+      "RequiresRestorePoint": false,
+      "Tags": [
+        "cleanup",
+        "temp",
+        "storage"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {}
+    },
+    {
+      "Id": "Performance.HighPerformancePower",
+      "Name": "High Performance Power Plan",
+      "Description": "Selects Windows' built-in High Performance scheme. On laptops this can increase power consumption and heat.",
+      "Category": "Performance",
+      "Scope": "System",
+      "Provider": "PowerPlan",
+      "Risk": "Medium",
+      "RequiresAdmin": true,
+      "Reversible": true,
+      "EnabledByDefault": false,
+      "RequiresRestorePoint": false,
+      "Tags": [
+        "power",
+        "performance",
+        "laptop"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {
+        "Guid": "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"
+      }
+    },
+    {
+      "Id": "Network.FlushDns",
+      "Name": "Flush DNS Cache",
+      "Description": "Flushes the local DNS resolver cache. It does not change DNS servers.",
+      "Category": "Network",
+      "Scope": "System",
+      "Provider": "NetworkFlushDns",
+      "Risk": "Low",
+      "RequiresAdmin": true,
+      "Reversible": false,
+      "EnabledByDefault": false,
+      "RequiresRestorePoint": false,
+      "Tags": [
+        "dns",
+        "network",
+        "repair"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {}
+    },
+    {
+      "Id": "Network.WinsockReset",
+      "Name": "Reset Winsock",
+      "Description": "Resets the Winsock catalog. A reboot may be required after the reset.",
+      "Category": "Network",
+      "Scope": "System",
+      "Provider": "NetworkWinsockReset",
+      "Risk": "Medium",
+      "RequiresAdmin": true,
+      "Reversible": false,
+      "EnabledByDefault": false,
+      "RequiresRestorePoint": false,
+      "Tags": [
+        "winsock",
+        "network",
+        "repair"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {}
+    },
+    {
+      "Id": "Maintenance.DISMRestoreHealth",
+      "Name": "Repair Windows Component Store",
+      "Description": "Runs DISM /Online /Cleanup-Image /RestoreHealth. This can take a long time.",
+      "Category": "Maintenance",
+      "Scope": "System",
+      "Provider": "DISM",
+      "Risk": "Medium",
+      "RequiresAdmin": true,
+      "Reversible": false,
+      "EnabledByDefault": false,
+      "RequiresRestorePoint": true,
+      "Tags": [
+        "dism",
+        "repair",
+        "maintenance"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {}
+    },
+    {
+      "Id": "Maintenance.SFC",
+      "Name": "Verify Protected System Files",
+      "Description": "Runs sfc /scannow to verify and repair protected Windows system files.",
+      "Category": "Maintenance",
+      "Scope": "System",
+      "Provider": "SFC",
+      "Risk": "Medium",
+      "RequiresAdmin": true,
+      "Reversible": false,
+      "EnabledByDefault": false,
+      "RequiresRestorePoint": true,
+      "Tags": [
+        "sfc",
+        "repair",
+        "maintenance"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {}
+    },
+    {
+      "Id": "Debloat.OptionalAppx",
+      "Name": "Remove Optional Appx Whitelist",
+      "Description": "Removes only the explicit WinUtil optional-app whitelist. Microsoft Store and core system apps are intentionally excluded.",
+      "Category": "Debloat",
+      "Scope": "System",
+      "Provider": "AppxWhitelist",
+      "Risk": "Medium",
+      "RequiresAdmin": true,
+      "Reversible": false,
+      "EnabledByDefault": false,
+      "RequiresRestorePoint": false,
+      "Tags": [
+        "debloat",
+        "appx",
+        "apps"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {}
+    },
+    {
+      "Id": "Services.DeliveryOptimizationManual",
+      "Name": "Delivery Optimization -> Manual",
+      "Description": "Changes Delivery Optimization (DoSvc) startup to Manual. This may affect update/app delivery behavior and is intentionally opt-in.",
+      "Category": "Services",
+      "Scope": "System",
+      "Provider": "ServiceStartup",
+      "Risk": "High",
+      "RequiresAdmin": true,
+      "Reversible": true,
+      "EnabledByDefault": false,
+      "RequiresRestorePoint": true,
+      "Tags": [
+        "service",
+        "update",
+        "advanced"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {
+        "ServiceName": "DoSvc",
+        "StartupType": "Manual"
+      }
+    },
+    {
+      "Id": "Security.DefenderStatus",
+      "Name": "Microsoft Defender Status (Read Only)",
+      "Description": "Reads Defender status without changing security settings.",
+      "Category": "Security",
+      "Scope": "System",
+      "Provider": "DefenderStatus",
+      "Risk": "Low",
+      "RequiresAdmin": false,
+      "Reversible": false,
+      "EnabledByDefault": true,
+      "RequiresRestorePoint": false,
+      "Tags": [
+        "defender",
+        "security",
+        "status"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {}
+    },
+    {
+      "Id": "WindowsUpdate.Status",
+      "Name": "Windows Update Status",
+      "Description": "Reads core Windows Update service state without changing settings.",
+      "Category": "WindowsUpdate",
+      "Scope": "System",
+      "Provider": "WindowsUpdateStatus",
+      "Risk": "Low",
+      "RequiresAdmin": false,
+      "Reversible": false,
+      "EnabledByDefault": true,
+      "RequiresRestorePoint": false,
+      "Tags": [
+        "update",
+        "status",
+        "readonly"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {}
+    },
+    {
+      "Id": "WindowsUpdate.RepairServices",
+      "Name": "Restart Windows Update Services",
+      "Description": "Restarts BITS and Windows Update services when possible. It does not disable or block updates.",
+      "Category": "WindowsUpdate",
+      "Scope": "System",
+      "Provider": "WindowsUpdateRepair",
+      "Risk": "Medium",
+      "RequiresAdmin": true,
+      "Reversible": false,
+      "EnabledByDefault": false,
+      "RequiresRestorePoint": false,
+      "Tags": [
+        "update",
+        "repair"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {}
+    },
+    {
+      "Id": "Services.Inventory",
+      "Name": "Key Service Inventory",
+      "Description": "Reads selected service states and startup modes without modifying them.",
+      "Category": "Services",
+      "Scope": "System",
+      "Provider": "ServiceInventory",
+      "Risk": "Low",
+      "RequiresAdmin": false,
+      "Reversible": false,
+      "EnabledByDefault": true,
+      "RequiresRestorePoint": false,
+      "Tags": [
+        "service",
+        "inventory",
+        "readonly"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {}
+    },
+    {
+      "Id": "Security.FirewallStatus",
+      "Name": "Windows Firewall Status",
+      "Description": "Reads Windows Firewall profile status without modifying it.",
+      "Category": "Security",
+      "Scope": "System",
+      "Provider": "FirewallStatus",
+      "Risk": "Low",
+      "RequiresAdmin": false,
+      "Reversible": false,
+      "EnabledByDefault": true,
+      "RequiresRestorePoint": false,
+      "Tags": [
+        "firewall",
+        "security",
+        "status"
+      ],
+      "SupportedOS": [
+        "Windows 10",
+        "Windows 11"
+      ],
+      "Settings": {}
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "WinUtil NG",
+  "short_name": "WinUtil NG",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#080c16",
+  "theme_color": "#0b1020",
+  "description": "Static Windows maintenance dashboard for the WinUtil NG local agent."
+}
