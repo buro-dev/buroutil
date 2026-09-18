@@ -4,20 +4,9 @@ BuroUtil separates the static web UI from the privileged Windows agent.
 
 ## Windows end user
 
-Extract the release ZIP and double-click `START-BUROUTIL.cmd`.
+A prepared self-contained Windows release can be extracted and launched with `START-BUROUTIL.cmd`.
 
-For a source checkout, build first with:
-
-```powershell
-Set-ExecutionPolicy -Scope Process Bypass
-.\build.ps1
-```
-
-Then:
-
-```powershell
-.\scripts\start-buroutil.ps1
-```
+When using the GitHub source ZIP, the launcher automatically builds the agent when `artifacts\win-x64\WinUtil.Agent.exe` is missing. That source-build path requires the .NET 10 SDK.
 
 The launcher starts the UI on `127.0.0.1:5173`, starts the agent on `127.0.0.1:15721`, and opens the browser.
 
@@ -52,11 +41,17 @@ Node development server:
 npm start
 ```
 
-## Linux
+## Linux / static hosting
 
-Linux can host the static UI. Windows-specific PowerShell providers require Windows.
+Linux should host only the static UI. The privileged Windows Agent and its Windows PowerShell providers run on the user's Windows machine.
 
-Simple static test:
+Local Linux static server:
+
+```bash
+./scripts/serve-linux-static.sh
+```
+
+Or:
 
 ```bash
 python3 -m http.server 8080 --directory site --bind 0.0.0.0
@@ -64,21 +59,19 @@ python3 -m http.server 8080 --directory site --bind 0.0.0.0
 
 Production: use Nginx/Caddy/another HTTPS static server.
 
-The Windows Agent should not be exposed from a Linux server. A hosted static page can call a loopback agent on the user's own Windows machine when the browser and agent security policy allow the exact origin.
+A hosted static page can call a loopback agent on the user's own Windows machine when the agent security policy allows the exact site origin.
 
 ## Free static hosting
 
-GitHub Pages, Cloudflare Pages, Netlify and basic static hosting can serve `site/`. InfinityFree-style hosting can also serve ordinary static HTML/CSS/JS if the host permits it.
-
-Important: static hosting cannot run the privileged Windows Agent. The user's Windows PC still needs the local agent.
+GitHub Pages, Cloudflare Pages, Netlify and ordinary static hosting can serve `site/`. A static host cannot run the privileged Windows Agent.
 
 ## Prerequisites
 
-End users should receive a self-contained Windows release so no .NET runtime is required.
+Prepared self-contained Windows releases need no .NET runtime.
 
-Developers need:
+Developers using the repository source need:
 
-- .NET 10 SDK for source builds
+- .NET 10 SDK
 - Windows PowerShell 5.1 on Windows
 - Git
 - Node.js 20+ only for optional site tooling

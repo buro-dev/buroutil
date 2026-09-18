@@ -1,6 +1,6 @@
 {
   "name": "winutil-ng",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "type": "module",
   "description": "Static UI + local Windows agent + PowerShell provider engine.",
