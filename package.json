@@ -1,0 +1,13 @@
+{
+  "name": "winutil-ng",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Static UI + local Windows agent + PowerShell provider engine.",
+  "scripts": {
+    "start": "node tools/serve-site.mjs",
+    "dev": "node tools/serve-site.mjs",
+    "validate": "node tools/validate-manifest.mjs"
+  },
+  "engines": { "node": ">=20" }
+}
